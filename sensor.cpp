@@ -22,13 +22,21 @@ void Sensor::addToBaseline() {
   currentIndex = l(currentIndex + 1);
 }
 
-bool Sensor::triggered() {
-  if (maxAccel - maxDeccel > 10) {
-    _resetFinding();
+void Sensor::resetFinding() {
+  percentDrop = 100;
+  totalTime   = 0;
+  value       = 0;
+  maxAccel    = 0;
+  maxDeccel   = 0;
+}
 
+bool Sensor::triggered() {
+  if (maxAccel - maxDeccel > 15) {
     if (millis() - debounceTimer > DEBOUNCE_LIMIT) {
       debounceTimer = millis();
       return true;
+    } else {
+      resetFinding();
     }
   }
   return false;
@@ -90,15 +98,6 @@ void Sensor::_calculateFinding() {
     maxDeccel   = _maxDeccel;
     maxAccel    = _maxAccel;
   }
-}
-
-
-void Sensor::_resetFinding() {
-  percentDrop = 100;
-  totalTime   = 0;
-  value       = 0;
-  maxAccel    = 0;
-  maxDeccel   = 0;
 }
 
 int Sensor::l(int _value) {

@@ -14,6 +14,7 @@ class Sensor
     void calculate();
     void addToBaseline();
     bool triggered();
+    void resetFinding();
 
     // Finding
     int   percentDrop = 100;
@@ -39,7 +40,6 @@ class Sensor
     void _updateMax();
     bool _ascending();
     void _calculateFinding();
-    void _resetFinding();
     int  l(int _value);
 };
 

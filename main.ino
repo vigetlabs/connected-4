@@ -44,31 +44,73 @@ void determineState() {
   sensor5.calculate();
   sensor6.calculate();
 
-  checkForTrigger(sensor0, 0);
-  checkForTrigger(sensor1, 1);
-  checkForTrigger(sensor2, 2);
-  checkForTrigger(sensor3, 3);
-  checkForTrigger(sensor4, 4);
-  checkForTrigger(sensor5, 5);
-  checkForTrigger(sensor6, 6);
-  // if (sensor0.triggered()) {
-  //   if (millis() - lastTrigger > triggerDebounce) {
-  //     pendingTrigger = 0;
-  //   } else {
-  //     pendingTrigger = -1;
-  //   }
-  //   lastTrigger = millis();
-  // }
-}
-
-void checkForTrigger(Sensor s, int index) {
-  if (s.triggered()) {
+  if (sensor0.triggered()) {
     if (millis() - lastTrigger > triggerDebounce) {
-      pendingTrigger = index;
+      pendingTrigger = 0;
     } else {
-      Serial.println("Debouncing");
       pendingTrigger = -1;
     }
+    sensor0.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor1.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 1;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor1.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor2.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 2;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor2.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor3.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 3;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor3.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor4.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 4;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor4.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor5.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 5;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor5.resetFinding();
+    lastTrigger = millis();
+  }
+
+  if (sensor6.triggered()) {
+    if (millis() - lastTrigger > triggerDebounce) {
+      pendingTrigger = 6;
+    } else {
+      pendingTrigger = -1;
+    }
+    sensor6.resetFinding();
     lastTrigger = millis();
   }
 }
@@ -76,72 +118,7 @@ void checkForTrigger(Sensor s, int index) {
 void display() {
   if ((pendingTrigger != -1) && (millis() - lastTrigger > triggerDebounce)) {
     Serial.print("Row ");
-    switch (pendingTrigger) {
-      case 0:
-        Serial.println(0);
-        Serial.print("Accel: ");
-        Serial.println(sensor0.maxAccel - sensor0.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor0.value);
-        Serial.print("Time: ");
-        Serial.println(sensor0.totalTime);
-        break;
-      case 1:
-        Serial.println(1);
-        Serial.print("Accel: ");
-        Serial.println(sensor1.maxAccel - sensor1.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor1.value);
-        Serial.print("Time: ");
-        Serial.println(sensor1.totalTime);
-        break;
-      case 2:
-        Serial.println(2);
-        Serial.print("Accel: ");
-        Serial.println(sensor2.maxAccel - sensor2.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor2.value);
-        Serial.print("Time: ");
-        Serial.println(sensor2.totalTime);
-        break;
-      case 3:
-        Serial.println(3);
-        Serial.print("Accel: ");
-        Serial.println(sensor3.maxAccel - sensor3.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor3.value);
-        Serial.print("Time: ");
-        Serial.println(sensor3.totalTime);
-        break;
-      case 4:
-        Serial.println(4);
-        Serial.print("Accel: ");
-        Serial.println(sensor4.maxAccel - sensor4.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor4.value);
-        Serial.print("Time: ");
-        Serial.println(sensor4.totalTime);
-        break;
-      case 5:
-        Serial.println(5);
-        Serial.print("Accel: ");
-        Serial.println(sensor5.maxAccel - sensor5.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor5.value);
-        Serial.print("Time: ");
-        Serial.println(sensor5.totalTime);
-        break;
-      case 6:
-        Serial.println(6);
-        Serial.print("Accel: ");
-        Serial.println(sensor6.maxAccel - sensor6.maxDeccel);
-        Serial.print("Value: ");
-        Serial.println(sensor6.value);
-        Serial.print("Time: ");
-        Serial.println(sensor6.totalTime);
-        break;
-    }
-
+    Serial.println(pendingTrigger);
 
     pendingTrigger = -1;
   }
