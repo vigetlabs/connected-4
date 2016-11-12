@@ -23,7 +23,7 @@ void Sensor::addToBaseline() {
 }
 
 bool Sensor::triggered() {
-  if (maxAccel - maxDeccel > 20) {
+  if (maxAccel - maxDeccel > 10) {
     _resetFinding();
 
     if (millis() - debounceTimer > DEBOUNCE_LIMIT) {
