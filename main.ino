@@ -45,6 +45,7 @@ void determineState() {
   sensor6.calculate();
 
   if (sensor0.triggered()) {
+    Serial.println("sensor0 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 0;
     } else {
@@ -55,6 +56,7 @@ void determineState() {
   }
 
   if (sensor1.triggered()) {
+    Serial.println("sensor1 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 1;
     } else {
@@ -65,6 +67,7 @@ void determineState() {
   }
 
   if (sensor2.triggered()) {
+    Serial.println("sensor2 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 2;
     } else {
@@ -75,6 +78,7 @@ void determineState() {
   }
 
   if (sensor3.triggered()) {
+    Serial.println("sensor3 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 3;
     } else {
@@ -85,6 +89,7 @@ void determineState() {
   }
 
   if (sensor4.triggered()) {
+    Serial.println("sensor4 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 4;
     } else {
@@ -95,6 +100,7 @@ void determineState() {
   }
 
   if (sensor5.triggered()) {
+    Serial.println("sensor5 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 5;
     } else {
@@ -105,6 +111,7 @@ void determineState() {
   }
 
   if (sensor6.triggered()) {
+    Serial.println("sensor6 trigger");
     if (millis() - lastTrigger > triggerDebounce) {
       pendingTrigger = 6;
     } else {
@@ -117,7 +124,7 @@ void determineState() {
 
 void display() {
   if ((pendingTrigger != -1) && (millis() - lastTrigger > triggerDebounce)) {
-    Serial.print("Row ");
+    Serial.print("HIT HIT HIT: Row ");
     Serial.println(pendingTrigger);
 
     pendingTrigger = -1;

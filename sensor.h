@@ -3,7 +3,7 @@
 
 #include "application.h"
 
-#define HISTORY_LENGTH 110
+#define HISTORY_LENGTH 150
 #define DEBOUNCE_LIMIT 500 // half a second
 
 class Sensor
