@@ -9,6 +9,7 @@
 class Sensor
 {
   public:
+    Sensor();
     Sensor(int pin);
 
     void calculate();

@@ -1,5 +1,7 @@
 #include "sensor.h"
 
+Sensor::Sensor() {}
+
 Sensor::Sensor(int pin) {
   sensorPin = pin;
   pinMode(sensorPin, INPUT);
