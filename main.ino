@@ -12,9 +12,12 @@ int theirTurnPin = D5;
 
 bool myTurn = true;
 
+int demoButtonPin = D6;
+
 void setup() {
   pinMode(myTurnPin, OUTPUT);
   pinMode(theirTurnPin, OUTPUT);
+  pinMode(demoButtonPin, INPUT);
 
   Serial.begin(9600);
   Particle.subscribe("device2Turn", externalTurnHandler, MY_DEVICES);
@@ -33,20 +36,25 @@ void loop() {
 
 void determineState() {
   input.determineState();
+
+  if (digitalRead(demoButtonPin)) {
+    int column = rand() % 6;
+    moveToAndReset(column);
+  }
 }
 
 long myTurnTimer = millis();
 void display() {
+  if (myTurn && input.triggerFound()) {
+    handleInput();
+  }
+
   if (myTurn) {
     digitalWrite(myTurnPin, HIGH);
     digitalWrite(theirTurnPin, LOW);
   } else {
     digitalWrite(myTurnPin, LOW);
     digitalWrite(theirTurnPin, HIGH);
-  }
-
-  if (myTurn && input.triggerFound()) {
-    handleInput();
   }
 
   if (millis() - myTurnTimer > 500) {
