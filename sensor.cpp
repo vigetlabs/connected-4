@@ -25,7 +25,6 @@ void Sensor::addToBaseline() {
 }
 
 void Sensor::resetFinding() {
-  percentDrop = 100;
   totalTime   = 0;
   value       = 0;
   maxAccel    = 0;
@@ -71,7 +70,7 @@ void Sensor::_calculateFinding() {
 
   int _focusIndex;
   int _focusValue;
-  for (int i = 1; i < 100; i++) {
+  for (int i = 1; i < HISTORY_LENGTH; i++) {
     _focusIndex = l(currentIndex - i);
     _focusValue = history[_focusIndex];
 
@@ -94,7 +93,6 @@ void Sensor::_calculateFinding() {
   float _maxAccel  = (currentValue - _minimum) * 1.0 / l(_focusIndex - _minimumIndex);
 
   if (_maxDeccel < maxDeccel && _maxAccel > maxAccel) {
-    percentDrop = _minimum * 100 / currentValue;
     totalTime   = l(currentIndex - _lastIndex);
     value       = currentValue;
     maxDeccel   = _maxDeccel;

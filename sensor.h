@@ -18,7 +18,6 @@ class Sensor
     void resetFinding();
 
     // Finding
-    int   percentDrop = 100;
     int   totalTime   = 0;
     int   value       = 0;
     float maxAccel    = 0;

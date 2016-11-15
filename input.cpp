@@ -15,7 +15,7 @@ void Input::init() {
 }
 
 void Input::baselineMeasurements() {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < HISTORY_LENGTH; i++) {
     sensor0.addToBaseline();
     sensor1.addToBaseline();
     sensor2.addToBaseline();
