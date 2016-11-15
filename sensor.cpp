@@ -32,7 +32,7 @@ void Sensor::resetFinding() {
 }
 
 bool Sensor::triggered() {
-  if (maxAccel - maxDeccel > 15) {
+  if (maxAccel - maxDeccel > 20) {
     if (millis() - debounceTimer > DEBOUNCE_LIMIT) {
       debounceTimer = millis();
       return true;
@@ -43,9 +43,8 @@ bool Sensor::triggered() {
   return false;
 }
 
-
 void Sensor::_recordMeasurements() {
-  currentValue = analogRead(sensorPin);
+  currentValue          = analogRead(sensorPin);
   history[currentIndex] = currentValue;
 }
 
@@ -55,7 +54,7 @@ void Sensor::_updateMax() {
     localMaxIndex = currentIndex;
   } else if (currentIndex == localMaxIndex) {
     localMaxIndex = l(localMaxIndex + 1);
-    localMax = history[localMaxIndex];
+    localMax      = history[localMaxIndex];
   }
 }
 
@@ -78,13 +77,12 @@ void Sensor::_calculateFinding() {
       _lastIndex = _focusIndex;
       break;
     } else if (_focusValue < _minimum) {
-      _minimum = _focusValue;
+      _minimum      = _focusValue;
       _minimumIndex = _focusIndex;
     }
   }
+
   if (_lastIndex == -1)
-    return;
-  if (_minimum == currentValue)
     return;
   if (l(currentIndex - _lastIndex) < 40)
     return;
@@ -93,10 +91,10 @@ void Sensor::_calculateFinding() {
   float _maxAccel  = (currentValue - _minimum) * 1.0 / l(_focusIndex - _minimumIndex);
 
   if (_maxDeccel < maxDeccel && _maxAccel > maxAccel) {
-    totalTime   = l(currentIndex - _lastIndex);
-    value       = currentValue;
-    maxDeccel   = _maxDeccel;
-    maxAccel    = _maxAccel;
+    totalTime = l(currentIndex - _lastIndex);
+    value     = currentValue;
+    maxDeccel = _maxDeccel;
+    maxAccel  = _maxAccel;
   }
 }
 
